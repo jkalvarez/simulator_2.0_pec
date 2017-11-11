@@ -1,0 +1,13 @@
+%% Grabs .in files in ./in_files_pec and converts all instances of rebar under shapes and replaces them with 'pec' material instead
+
+%% 
+
+fname = './in_files/sim13.in';
+
+fid=fopen(fname,'r');  % check for success in real life...
+data = textscan(fid,'%s%s','Delimiter',':','headerlines',18);
+
+fprintf(fid, )
+
+fid = fclose(fid);
+

@@ -1,0 +1,67 @@
+function [] = generate_dataset(training_set, testing_set, sim_path, gt_path)
+%% Generates dataset from gprMax simulation output and permittivity map
+%   Takes simualation id matrix/array of sims to be converted. First
+%   arg is training set id array, second arg is testing set id array.
+
+%   Dataset is saved into combined_images under train-test-val folders.
+%   Training set is 10:1 to testing. 
+
+%%  Loads training simulation dataset
+
+image_count = 1;
+
+for i=1:size(training_set, 1) 
+    % Go through training id sets and store in ./combined_images/train
+    
+    % ./permittivity_map_images/logit_scaled/
+    gt_filename = sprintf(gt_path+'gt%d.png', training_set(i));
+    image_gt = imread(gt_filename);
+    
+    % try .out file, if error thrown, then txt file
+    try
+        % ./gprMax_output/
+        sim_filename = sprintf(sim_path+'sim%d_merged.out', training_set(i));
+        % Load HDF5 file
+        data = hdf5read(data_filename, 'rxs/rx1/Ez');
+        data = double(data)';
+
+        
+    catch
+        sim_filename = sprintf('./gprMax_output/sim%d.txt', training_set(i));
+        data = importfile(sim_filename);
+    end
+    
+    image_gprMax = process_gprMax_data(data);
+    
+    stride = 4;
+    
+end
+
+end
+
+function combine_image(imastride, gpr, gt)
+
+    % Control the stride of the sliding window operation
+    [~, width, ~] = size(gt);
+    stride_end = width-125;
+
+    % Starting image number. Used for creating image file names that don't
+    % start at 1
+    j = 241;
+
+    for i=1:stride:4800
+        a = imcrop(gprMax_image,[i 1 125 125]);
+        b = imcrop(x,[i 1 125 125]);
+
+        %Image concatenation
+        c = [a b];
+        combined_filename = sprintf('./combined_images/val/%d.png', j);
+        imwrite(c, combined_filename);
+
+        j = j + 1;
+
+end
+
+end
+
+

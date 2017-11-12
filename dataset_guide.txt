@@ -1,4 +1,4 @@
-rebar only
+PEC only
 sim1 - TESTING
 sim2 - TRAINING
 sim3 - TRAINING
@@ -6,8 +6,8 @@ sim4 - TRAINING
 
 1 1201 2401 3601 4801 6001 7201 8401 9601
 
-rebar with air
-sim5 - training - 1200
+PEC with air
+sim5 - training
 sim6 - training
 sim7 - training
 sim8 - testing
@@ -24,7 +24,7 @@ sim14 - training
 sim15 - training
 sim16 - testing
 
-water and rebar
+water and PEC
 sim17 - training
 sim18 - training
 sim19 - training
@@ -36,7 +36,7 @@ sim22 - training
 sim23 - training
 sim24 - testing
 
-water and rebar and air
+water and PEC and air
 sim25 - training
 sim26 - training
 sim27 - training
